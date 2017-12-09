@@ -22,14 +22,9 @@ public class ServerConfiguration implements IConfiguration, IServerConfiguration
 	private List<IComposant> innerComposants;
 	private List<IConnecteur> connecteurs;
 
-	public ServerConfiguration(List<IConnecteur> connecteurs) {
-		super();
+	public ServerConfiguration(List<IConnecteur> connecteurs, IServer server, ISecurityManager securityManager, IConnectionManager connectionManager, IBaseDonnees baseDonnees) {
 		this.interfaceConfiguration = new InterfaceConfiguration();
-		this.innerComposants = new ArrayList<IComposant>();
-		IServer server = new Server();
-		ISecurityManager securityManager = new SecurityManager();
-		IConnectionManager connectionManager = new ConnectionManager();
-		IBaseDonnees baseDonnees = new BaseDonnees();
+		this.innerComposants = new ArrayList<IComposant>();	
 		this.innerComposants.add(server);
 		this.innerComposants.add(securityManager);
 		this.innerComposants.add(connectionManager);
