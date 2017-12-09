@@ -3,7 +3,6 @@ package fr.alma2017.clientServer;
 import fr.alma2017.api.IObservable;
 import fr.alma2017.api.IObserver;
 import fr.alma2017.api.client.IClient;
-import fr.alma2017.api.composant.IComposant;
 import fr.alma2017.client.Client;
 import fr.alma2017.exception.NotProxiedClassException;
 import fr.alma2017.proxy.Proxifieur;
@@ -20,7 +19,7 @@ public class Main {
 
 	
 	public static void main(String[] args) {
-		//clientServeurConfig = new ClientServerConfiguration();
+		clientServeurConfig = new ClientServerConfiguration();
 		
 		//test (remember extensible)
 		try {
