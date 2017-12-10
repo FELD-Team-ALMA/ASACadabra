@@ -2,7 +2,6 @@ package fr.alma2017.clientServer;
 
 import java.util.ArrayList;
 import java.util.List;
-import fr.alma2017.api.IObservable;
 import fr.alma2017.api.client.IClient;
 import fr.alma2017.api.clientServer.IClientServerConfiguration;
 import fr.alma2017.api.composant.IComposant;
@@ -40,30 +39,14 @@ public class ClientServerConfiguration extends AConfiguration implements IConfig
 		//instanciation du serveur
 		IServer server = (IServer) Proxifieur.getProxyFor(Server.getServer(), IServer.class);
 		composantsInternes.add(server);
-		//passage du serveur � la config serveur
 		
 		//instanciation du client
 		IClient client = (IClient) Proxifieur.getProxyFor(new Client(), IClient.class);
 		composantsInternes.add(client);
-/*
-		for(IComposant composant : this.composantsInternes) {
-			if(composant instanceof IObservable) {
-				this.interfaceConfiguration.createBinding(this, (IObservable)composant);
-			}
-		}
-*/		
+		
 		//instanciation des connecteurs
 		//TODO
 		
-	}
-
-	@Override
-	public void bindComposant() {
-		for(IComposant composant : this.composantsInternes) {
-			if(composant instanceof IObservable) {
-				this.interfaceConfiguration.createBinding(this, (IObservable)composant);
-			}
-		}
 	}
 	
 	@Override
@@ -88,17 +71,24 @@ public class ClientServerConfiguration extends AConfiguration implements IConfig
 				System.out.println("Notification pour " + this.getClass().getName() + " : " + 
 						((List<?>)source).get(0) + " : " + ((List<?>)source).get(2) );
 			}
-			this.sendMessage(this.getServer(), source);
+			this.getServer().sendMessage((List<?>) source);
 		}
 	}
-
+	
+	@Override
 	public void sendMessage(IServer server, Object source) {
 		
 	}
 
 	@Override
 	public IServer getServer() {
-		return Server.getServer();
+		IServer res = null;
+		for(IComposant composant : this.composantsInternes) {
+			if(composant instanceof IServer) {
+				res = (IServer) composant;
+			}
+		}
+		return res;
 	}
 
 	@Override

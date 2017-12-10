@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.alma2017.api.IObserver;
-import fr.alma2017.api.client.IClient;
+import fr.alma2017.api.clientServer.IClientServerConfiguration;
+import fr.alma2017.api.server.IServerConfiguration;
 import fr.alma2017.clientServer.Main;
 
 public class ProxyServer implements InvocationHandler {
@@ -31,16 +32,26 @@ public class ProxyServer implements InvocationHandler {
 			if(Main.Sysout) {
 				System.out.println(target.getClass().getName() + " ["+ method.getName().substring(3) + "=" + args[0] + "] is modified");
 			}
-		/*}else if(method.getName().equals("sendMessage") && this.observer != null){
-			List<String> message = ((IClient)target).makeMessage();
+		}else if(method.getName().equals("sendMessage") && this.observer != null){
 			ret = method.invoke(this.target, args);
 			if(Main.Sysout) {
-				System.out.println(this.target.getClass().getName() + " est observee par " + this.observer.size() + " objets.");
+				System.out.println("Proxy Server : " + this.target.getClass().getName() + " est observee par " + this.observer.size() + " objets.");
 			}
 			for(IObserver observer : this.observer) {
-				observer.notify( message );
-			}*/
+				System.out.println("Look me in the eyes");
+				if(observer instanceof IServerConfiguration) {
+					System.out.println("UNE CONFIG");
+					if(args[1] instanceof List<?>) {
+						observer.notify( args );
+					}
+				}else if (observer instanceof IClientServerConfiguration) {
+					System.out.println("U MAD BRO ?");
+				}
+			}
 		}else{
+			if(Main.Sysout) {
+				System.out.println("\tProxy Server :  call " + method.getName());
+			}
 			ret = method.invoke(this.target, args);
 		}
 		return ret;

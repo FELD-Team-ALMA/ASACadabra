@@ -45,24 +45,10 @@ public class ServerConfiguration extends AConfiguration implements IConfiguratio
 		this.composantsInternes.add(securityManager);
 		this.composantsInternes.add(connectionManager);
 		this.composantsInternes.add(baseDonnees);
-		/*
-		for(IComposant composant : this.composantsInternes) {
-			if(composant instanceof IObservable) {
-				this.getInterface().createBinding(this, (IObservable)composant);
-			}
-		}*/
 		
 		this.connecteurs = new ArrayList<IConnecteur>();
 	}
 	
-	@Override
-	public void bindComposant() {
-		for(IComposant composant : this.composantsInternes) {
-			if(composant instanceof IObservable) {
-				this.interfaceConfiguration.createBinding(this, (IObservable)composant);
-			}
-		}
-	}
 	@Override
 	public void notify(Object source) {
 		if(Main.Sysout) {
@@ -70,5 +56,4 @@ public class ServerConfiguration extends AConfiguration implements IConfiguratio
 		}
 	}
 
-	
 }
