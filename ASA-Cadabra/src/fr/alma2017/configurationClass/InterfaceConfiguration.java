@@ -1,8 +1,6 @@
 package fr.alma2017.configurationClass;
 
 import java.util.List;
-import java.util.Set;
-
 import fr.alma2017.api.IObservable;
 import fr.alma2017.api.IObserver;
 import fr.alma2017.api.configuration.IConfiguration;
@@ -22,8 +20,9 @@ public class InterfaceConfiguration implements IInterfaceConfiguration {
 	@Override
 	public void createBinding(IConfiguration configuration, IObservable composant) {
 		((IObservable) composant).addObserver(configuration);
+		((IObservable) configuration).addObserver((IObserver) composant);
 		if(Main.Sysout) {
-			System.out.println(configuration.getClass().getName() + " observe " + composant.getClass().getName());
+			System.out.println(configuration.getClass().getName() + " est lié a " + composant.getClass().getName());
 		}
 	}
 
