@@ -1,13 +1,11 @@
 package fr.alma2017.proxy;
 
 import java.lang.reflect.Proxy;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import fr.alma2017.api.IObservable;
 import fr.alma2017.api.client.IClient;
 import fr.alma2017.api.clientServer.IClientServerConfiguration;
-import fr.alma2017.api.configuration.IConfiguration;
 import fr.alma2017.api.server.IBaseDonnees;
 import fr.alma2017.api.server.IConnectionManager;
 import fr.alma2017.api.server.ISecurityManager;

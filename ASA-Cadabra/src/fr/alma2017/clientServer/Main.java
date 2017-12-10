@@ -1,7 +1,5 @@
 package fr.alma2017.clientServer;
 
-import java.util.List;
-
 import fr.alma2017.api.IObservable;
 import fr.alma2017.api.client.IClient;
 import fr.alma2017.api.clientServer.IClientServerConfiguration;
@@ -10,7 +8,6 @@ import fr.alma2017.api.configuration.IConfiguration;
 import fr.alma2017.api.server.IServerConfiguration;
 import fr.alma2017.exception.NotProxiedClassException;
 import fr.alma2017.proxy.Proxifieur;
-import fr.alma2017.server.Server;
 import fr.alma2017.server.ServerConfiguration;
 
 /**
@@ -28,18 +25,17 @@ public class Main {
 	}
 	
 	
-	//private static IClientServerConfiguration clientServeurConfig;
 	public static boolean Sysout = true;	
 	
 	public static void main(String[] args) throws NotProxiedClassException {
-		//Main.Sysout = false;
+		Main.Sysout = false;
 		IClientServerConfiguration clientServeurConfig = (IClientServerConfiguration) 
 				Proxifieur.getProxyFor(new ClientServerConfiguration(), IClientServerConfiguration.class);
 
 		Main.bindComposant(clientServeurConfig);
 		System.out.println();
 		IServerConfiguration serverConfiguration = (IServerConfiguration) 
-				Proxifieur.getProxyFor(new ServerConfiguration(Server.getServer()), IServerConfiguration.class);
+				Proxifieur.getProxyFor(new ServerConfiguration(clientServeurConfig.getServer()), IServerConfiguration.class);
 		Main.bindComposant(serverConfiguration);
 		
 		Main.Sysout = true;
@@ -56,10 +52,11 @@ public class Main {
 		};
 		((IObservable) client).addObserver(observer);
 		*/
-		List<String> mes = client.makeMessage();
+
+		client.makeMessage();
 		client.setMessage("Piou");
 		client.sendMessage();
-		//clientServeurConfig.sendMessage(clientServeurConfig.getServer(), mes);
+		//clientServeurConfig.sendMessage(clientServeurConfig.getServer(), mes);;
 	}
 
 }
