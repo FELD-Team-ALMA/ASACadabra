@@ -5,6 +5,7 @@ import fr.alma2017.api.client.IClient;
 import fr.alma2017.api.clientServer.IClientServerConfiguration;
 import fr.alma2017.api.composant.IComposant;
 import fr.alma2017.api.configuration.IConfiguration;
+import fr.alma2017.api.connecteur.IConnecteur;
 import fr.alma2017.api.server.IServerConfiguration;
 import fr.alma2017.exception.NotProxiedClassException;
 import fr.alma2017.proxy.Proxifieur;
@@ -28,7 +29,7 @@ public class Main {
 	public static boolean Sysout = true;	
 	
 	public static void main(String[] args) throws NotProxiedClassException {
-		Main.Sysout = false;
+		//Main.Sysout = false;
 		IClientServerConfiguration clientServeurConfig = (IClientServerConfiguration) 
 				Proxifieur.getProxyFor(new ClientServerConfiguration(), IClientServerConfiguration.class);
 
@@ -56,7 +57,6 @@ public class Main {
 		client.makeMessage();
 		client.setMessage("Piou");
 		client.sendMessage();
-		//clientServeurConfig.sendMessage(clientServeurConfig.getServer(), mes);;
 	}
 
 }

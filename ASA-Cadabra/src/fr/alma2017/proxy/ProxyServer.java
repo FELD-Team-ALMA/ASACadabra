@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
 import fr.alma2017.api.IObserver;
 import fr.alma2017.api.server.IServerConfiguration;
 import fr.alma2017.clientServer.Main;

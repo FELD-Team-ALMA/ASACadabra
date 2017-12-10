@@ -59,6 +59,7 @@ public class ServerConfiguration extends AConfiguration implements IConfiguratio
 			System.out.println("Notification pour " + this.getClass().getName() + " : " + source.toString());
 		}
 	}
+
 	
 	
 

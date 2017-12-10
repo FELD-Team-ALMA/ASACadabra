@@ -43,10 +43,19 @@ public class ClientServerConfiguration extends AConfiguration implements IConfig
 		//instanciation du client
 		IClient client = (IClient) Proxifieur.getProxyFor(new Client(), IClient.class);
 		composantsInternes.add(client);
-		
+    
 		//instanciation des connecteurs
 		//TODO
 		
+	}
+	
+	@Override
+	public void bindComposant() {
+		for(IComposant composant : this.composantsInternes) {
+			if(composant instanceof IObservable) {
+				this.interfaceConfiguration.createBinding(this, (IObservable)composant);
+			}
+		}
 	}
 	
 	@Override
@@ -76,6 +85,10 @@ public class ClientServerConfiguration extends AConfiguration implements IConfig
 	}
 	
 	@Override
+	public void sendMessage(IServer server, Object source) {
+		
+	}
+
 	public void sendMessage(IServer server, Object source) {
 		
 	}
