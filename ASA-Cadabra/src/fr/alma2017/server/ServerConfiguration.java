@@ -54,20 +54,17 @@ public class ServerConfiguration extends AConfiguration implements IConfiguratio
 			List<?> listeSource = (List<?>) source;
 			//System.out.println("Size");
 			//System.out.println(listeSource.size());
-			//System.out.println(listeSource.toString());
+			System.out.println(listeSource.toString());
 			if (listeSource.get(0) instanceof String) {
-				System.out.println("JE SUIS UN STRING");
 				this.getConnectionManager().requestConnection(listeSource);
 			}
-			else if (listeSource.get(0) instanceof IConnectionManager) {
-				System.out.println("CONNEXIIIIOON");
+			else if (listeSource.get(0).equals(IConnectionManager.class)) {
 				this.getSecurityManager().authentify(listeSource.subList(1, listeSource.size()));
 			}
-			else if (listeSource.get(0) instanceof ISecurityManager) {
-				System.out.println("THIS IS GRAVE SECURE");
+			else if (listeSource.get(0).equals(ISecurityManager.class)) {
 				this.getBaseDonnees().getInfo(listeSource.subList(1, listeSource.size()));
 			}
-			else if (listeSource.get(0) instanceof IBaseDonnees) {
+			else if (listeSource.get(0).equals(IBaseDonnees.class)) {
 				System.out.println("GIMME ALL DA DATA");
 				
 			}
@@ -79,7 +76,7 @@ public class ServerConfiguration extends AConfiguration implements IConfiguratio
 				else if (listeSource.size() > 3){
 					System.out.println("Notification pour " + this.getClass().getName() + " : " + 
 							listeSource.get(1) + " : " + listeSource.get(3) );
-					System.out.println("interface qui lance le machin " + listeSource.get(0));
+					//System.out.println("interface qui agit " + listeSource.get(0));
 				}
 			}
 			
