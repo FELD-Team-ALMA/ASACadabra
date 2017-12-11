@@ -86,12 +86,10 @@ public class ClientServerConfiguration extends AConfiguration implements IConfig
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
-			System.out.println("listeSource.get(0) instanceof String : " + listeSource.get(0) instanceof String);
 			if (listeSource.get(0) instanceof String) {
 				this.getServer().sendMessage(listeSource);
 			}
 			else if (listeSource.get(0).equals(IServer.class)) {
-				System.out.println("piooiesoingepnoieg");
 				this.getClient().receiveAnswer(listeSource.subList(1, listeSource.size()));
 			}
 			

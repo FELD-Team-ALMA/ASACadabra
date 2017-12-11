@@ -82,7 +82,7 @@ public class ServerConfiguration extends AConfiguration implements IConfiguratio
 				this.getBaseDonnees().getInfo(listeSource.subList(1, listeSource.size()));
 			}
 			else if (listeSource.get(0).equals(IBaseDonnees.class)) {
-				this.getServer().sendAnswer(listeSource);
+				this.getServer().sendAnswer(listeSource.subList(1, listeSource.size()));
 			}
 			
 		} else if(Main.Sysout) {
